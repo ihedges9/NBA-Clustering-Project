@@ -126,22 +126,18 @@ plot(x=cost_df$cluster, y=cost_df$tr_cost, main="k-Means Elbow Plot"
      , xlab="Number of Clusters", ylab="MSE (in 1000s)")
 points(x=cost_df$cluster, y=cost_df$te_cost, col="green")
 
-################################################################################
-# Looking at the information from your k-means clustering
-# Lets just generate a k-means clustering for k=4
-################################################################################
+#### K-means clustering with k=10 ####
 kmeans_tr <- kmeans(x=playerSeasonStats_z[rows,2:16], centers=10, nstart=20, iter.max=50)
 kmeans_te <- kmeans(x=playerSeasonStats_z[-rows,2:16], centers=10, nstart=20, iter.max=50)
 
-# You can look at the fit object to to see how many records are in each cluster,
-# the final centroids, the final cluster assignments, statistics of within and
-# between clusters
 kmeans_tr
 traininglabels <- kmeans_tr[1]
-# get cluster means (couple different ways)
+# get cluster means
 (centroids <- aggregate(playerSeasonStats_z[rows,2:16], by=list(kmeans_tr$cluster), FUN=mean))
 kmeans_te$centers
 
+
+#### Exporting cluster means and players with a cluster label identified ####
 getwd()
 
 write.table(kmeans_te$centers, file="10clusters_updated_PTS.csv", sep=",", quote=T
