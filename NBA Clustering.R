@@ -1,3 +1,7 @@
+# Ian Hedges
+# NBA Clustering Personal Project
+
+
 #### Data Loading ####
 getwd()
 setwd("C:/Users/ihedg/Documents/Personal Analytics Projects/R and Excel Files for NBA Project")
